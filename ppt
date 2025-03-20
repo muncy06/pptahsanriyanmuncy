@@ -1,0 +1,83 @@
+from pptx import Presentation
+from bs4 import BeautifulSoup
+
+# Load PowerPoint file
+ppt_path = "/mnt/data/NANOTEK PPT.pptx"
+presentation = Presentation(ppt_path)
+
+# Create basic HTML structure
+html_doc = """
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Nanoteknologi</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; text-align: center; background-color: #f4f4f4; }
+        .slide { display: none; padding: 20px; background: white; margin: 20px auto; max-width: 80%; box-shadow: 0 0 10px rgba(0,0,0,0.2); border-radius: 10px; }
+        .active { display: block; }
+        h1, h2 { color: #333; }
+        p { color: #555; text-align: justify; }
+        .nav-btn { margin: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; background: #007BFF; color: white; border: none; border-radius: 5px; }
+        .nav-btn:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+
+<div id="slides">
+"""
+
+# Convert slides to HTML
+for i, slide in enumerate(presentation.slides):
+    slide_content = f'<div class="slide {"active" if i == 0 else ""}">'
+    for shape in slide.shapes:
+        if hasattr(shape, "text"):
+            text = shape.text.strip()
+            if text:
+                if i == 0 and shape == slide.shapes[0]:  # First slide title
+                    slide_content += f"<h1>{text}</h1>"
+                else:
+                    slide_content += f"<p>{text}</p>"
+    slide_content += "</div>"
+    html_doc += slide_content
+
+# Add navigation buttons
+html_doc += """
+</div>
+
+<button class="nav-btn" onclick="prevSlide()">Sebelumnya</button>
+<button class="nav-btn" onclick="nextSlide()">Selanjutnya</button>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove("active");
+            if (i === index) slide.classList.add("active");
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+</script>
+
+</body>
+</html>
+"""
+
+# Save HTML file
+html_path = "/mnt/data/NANOTEK_PPT.html"
+with open(html_path, "w", encoding="utf-8") as f:
+    f.write(html_doc)
+
+html_path
