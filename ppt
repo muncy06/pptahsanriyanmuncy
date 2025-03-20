@@ -1,12 +1,3 @@
-from pptx import Presentation
-from bs4 import BeautifulSoup
-
-# Load PowerPoint file
-ppt_path = "/mnt/data/NANOTEK PPT.pptx"
-presentation = Presentation(ppt_path)
-
-# Create basic HTML structure
-html_doc = """
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -26,24 +17,19 @@ html_doc = """
 <body>
 
 <div id="slides">
-"""
+<div class="slide active"><p>NANOTEKNOLOGI DANNANOSTRUKTUR</p><p>Disusun oleh: AHSAN SYAF (22240003)
+M RIYAN RIZKI R (22240012) M IBNU MUNDZIR (22240011)
 
-# Convert slides to HTML
-for i, slide in enumerate(presentation.slides):
-    slide_content = f'<div class="slide {"active" if i == 0 else ""}">'
-    for shape in slide.shapes:
-        if hasattr(shape, "text"):
-            text = shape.text.strip()
-            if text:
-                if i == 0 and shape == slide.shapes[0]:  # First slide title
-                    slide_content += f"<h1>{text}</h1>"
-                else:
-                    slide_content += f"<p>{text}</p>"
-    slide_content += "</div>"
-    html_doc += slide_content
+PROGRAM STUDI TEKNOLOGI AGROINDUSTRI FAKULTAS TEKNIK DAN ILMU KOMPUTER UNIVERSITAS NAHDLATUL ULAMA INDONESIA</p></div><div class="slide "><p>Latar Belakang</p><p>Apa itu Nanoteknologi dan Nano struktur?
 
-# Add navigation buttons
-html_doc += """
+Nanoteknologi adalah bidang ilmu yang mempelajari manipulasi materi pada skala nanometer, yaitu satu per miliar meter, untuk menciptakan struktur, perangkat, dan sistem dengan fungsi baru atau yang ditingkatkan. Nanostruktur yaitu, sebagai komponen utama dalam nanoteknologi, merujuk pada struktur dengan ukuran nanometer yang memiliki sifat fisik, kimia, dan biologis unik dibandingkan dengan material dalam skala makro.
+Perkembangan nanoteknologi dan nanostruktur telah membuka peluang baru dalam berbagai bidang, termasuk elektronik, biomedis, energi, dan lingkungan. Salah satu aplikasi nanoteknologi yang signifikan adalah dalam pengelolaan air bersih.
+Penggunaan membran nanofiltrasi telah terbukti efektif dalam menyaring kontaminan dan menyediakan solusi untuk krisis air bersih. Penelitian oleh Setiawan et al. menunjukkan bahwa membran nanofiltrasi dapat menjadi solusi efektif untuk kebutuhan air bersih domestik.</p></div><div class="slide "><p>Prinsip Dasar Nanoteknologi</p><p>Nanoteknologi didasarkan pada beberapa prinsip utama:
+
+Efek Kuantum: Pada skala nano, sifat material mengalami perubahan signifikan akibat dominasi efek kuantum[Alivisatos, A. P. (1996)].
+Rasio Luas Permukaan terhadap Volume yang Tinggi: Material nano memiliki luas  permukaan  lebih  besar  dibanding  volumenya,  meningkatkan  reaktivitas kimia dan efisiensi katalitik[Pankhurst, Q. A., Connolly. 2003].
+Self-Assembly:  Molekul  atau  partikel  nano  dapat  membentuk  struktur terorganisir berdasarkan interaksi antar atom[Whitesides, G. M. (2005)].</p></div><div class="slide "><p>Teknologi yang Digunakan</p><p>Teknologi yang di gunakan yaitu menggunakan metode top-down melibatkan pemecahan material berukuran besar menjadi ukuran nano dengan teknik seperti litografi dan ball milling. Teknik ini sering digunakan dalam pembuatan perangkat mikroelektronika dan nanokomposit. Di sisi lain, metode bottom-up menggunakan pendekatan sintesis dari atom atau molekul kecil untuk membentuk nanomaterial melalui proses seperti deposisi uap kimia (CVD) dan metode sol-gel. Metode ini sering diterapkan dalam produksi nanopartikel dan nanotube karbon.</p></div><div class="slide "><p>Tantangan	dan Resiko</p><p>Tantangan dan risiko yang menyertainya tidak dapat diabaikan. Beberapa nanomaterial berpotensi menimbulkan dampak negatif terhadap kesehatan manusia dan lingkungan. Oleh karena itu, penelitian lebih lanjut serta regulasi yang ketat sangat diperlukan untuk memastikan keamanan penggunaannya.Dengan terus berkembangnya riset dan inovasi dalam bidang nanoteknologi, diharapkan teknologi ini dapat memberikan solusi yang lebih efektif dan berkelanjutan terhadap berbagai permasalahan global. Dukungan terhadap pengembangan dan penerapan nanoteknologi yang bertanggung jawab akan memastikan bahwa manfaatnya dapat dioptimalkan tanpa mengorbankan kesehatan dan lingkungan.</p></div><div class="slide "><p>Kesimpulan</p><p>Nanoteknologi merupakan salah satu cabang ilmu yang berkembang pesat dan berkontribusi besar dalam berbagai  bidang,  seperti  kesehatan,  energi,  elektronik,  dan  lingkungan.  Teknologi  ini  memungkinkan manipulasi material dalam skala nanometer sehingga menghasilkan sifat yang lebih unggul dibandingkan dengan material konvensional. Dengan berbagai metode sintesis, baik top-down maupun bottom-up, nanoteknologi terus menciptakan inovasi yang bermanfaat bagi kehidupan manusia.
+Dalam  bidang  kesehatan,  nanoteknologi  telah  merevolusi  sistem  penghantaran  obat  dengan memungkinkan terapi yang lebih tepat sasaran dan mengurangi efek samping. Selain itu, penggunaan nanopartikel perak dan emas dalam peralatan medis serta kosmetik semakin meningkatkan efektivitas pengobatan dan kebersihan.Di sektor energi, nanoteknologi telah berperan dalam pengembangan baterai yang lebih efisien dan tahan lama, serta sel surya yang lebih efektif dalam menangkap energi matahari. Teknologi ini juga membantu dalam efisiensi penggunaan bahan bakar dan penciptaan sumber energi yang lebih ramah lingkungan.</p></div><div class="slide "><p>TERIMA KASIH</p></div>
 </div>
 
 <button class="nav-btn" onclick="prevSlide()">Sebelumnya</button>
@@ -73,11 +59,3 @@ html_doc += """
 
 </body>
 </html>
-"""
-
-# Save HTML file
-html_path = "/mnt/data/NANOTEK_PPT.html"
-with open(html_path, "w", encoding="utf-8") as f:
-    f.write(html_doc)
-
-html_path
